@@ -105,7 +105,7 @@ $currentPageCourses = array_slice($courses, $startIndex, $coursesPerPage);
                         <div class="px-6 py-4 border-b">
                             <h2 class="text-2xl font-bold text-gray-900">Courses</h2>
                         </div>
-                        <div class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
                             <?php if (count($currentPageCourses) > 0): ?>
                             <?php foreach ($currentPageCourses as $cours): ?>
                             <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl">
@@ -114,10 +114,10 @@ $currentPageCourses = array_slice($courses, $startIndex, $coursesPerPage);
                                         <?php echo $cours['title']; ?>
                                     </h3>
                                     <p class="text-gray-600 mb-3 line-clamp-2">
-                                        <span class="font-medium text-gray-700">Description:</span> <?php echo $cours['description']; ?>
+                                        <span class="font-bold text-gray-700">Description:</span> <?php echo $cours['description']; ?>
                                     </p>
                                     <p class="text-gray-600 mb-3 line-clamp-3">
-                                        <span class="font-medium text-gray-700">Contenu:</span> <?php echo substr($cours['contenu'], 0, 100); ?>...
+                                        <span class="font-bold text-gray-700">Contenu:</span> <?php echo substr($cours['contenu'], 0, 100); ?>...
                                     </p>
                                     <div class="flex items-center justify-between text-gray-600 text-sm mb-3">
                                         <span class="my-4">
