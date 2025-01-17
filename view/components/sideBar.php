@@ -11,7 +11,7 @@ lg:w-64 md:w-48 "> <!-- Set different widths for different breakpoints -->
     <nav class="mt-6">
         <!-- Dashboard -->
         <div class="mb-2">
-            <a href="#" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200">
+            <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/adminDashboard.php" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-200">
                 <i class="fas fa-home w-6 text-lg"></i>
                 <span class="ml-2">Dashboard</span>
             </a>
@@ -27,11 +27,11 @@ lg:w-64 md:w-48 "> <!-- Set different widths for different breakpoints -->
                 <i class="fas fa-chevron-down"></i>
             </button>
             <div class="hidden pl-4 mt-2">
-                <a href="#" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
+                <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/home.php" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
                     <i class="fas fa-list w-6 text-sm"></i>
                     All Courses
                 </a>
-                <a href="#" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
+                <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/pendingCourses.php" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
                     <i class="fas fa-hourglass-half w-6 text-sm"></i>
                     Pending Courses
                 </a>
@@ -48,15 +48,15 @@ lg:w-64 md:w-48 "> <!-- Set different widths for different breakpoints -->
                 <i class="fas fa-chevron-down"></i>
             </button>
             <div class="hidden pl-4 mt-2">
-                <a href="#" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
+                <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/allStudents.php" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
                     <i class="fas fa-user-graduate w-6 text-sm"></i>
                     Students
                 </a>
-                <a href="#" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
+                <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/allTeachers.php" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
                     <i class="fas fa-chalkboard-teacher w-6 text-sm"></i>
                     Teachers
                 </a>
-                <a href="#" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
+                <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/pendingAccounts.php" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
                     <i class="fas fa-user-clock w-6 text-sm"></i>
                     Pending Accounts
                 </a>
@@ -65,19 +65,19 @@ lg:w-64 md:w-48 "> <!-- Set different widths for different breakpoints -->
 
          <!-- Tags and Categories -->
          <div class="mb-2">
-         <a href="#" class="block px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+         <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/allCategories.php" class="block px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                     <i class="fas fa-folder w-6 text-sm"></i>
                     All Categories
                 </a>
-                <a href="#" class="block px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/forms/addCategory.php" class="block px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                     <i class="fas fa-plus w-6 text-sm"></i>
                     Add Category
                 </a>
-                <a href="#" class="block px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/allTags.php" class="block px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                     <i class="fas fa-tags w-6 text-sm"></i>
                     All Tags
                 </a>
-                <a href="#" class="block px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/forms/addTag.php" class="block px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                     <i class="fas fa-plus w-6 text-sm"></i>
                     Add Tag
                 </a>
