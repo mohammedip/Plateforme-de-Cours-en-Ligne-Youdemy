@@ -35,7 +35,45 @@ class Cours{
          'c.*,u.username,count(DISTINCT c_e.etudiant_id) as count_iscription');
         return $courses;
     }
+
+    public static function getAllCourses(){
+
+        $courses =CRUD::select('cours c 
+        LEFT JOIN users u ON c.enseignant_id = u.id 
+        LEFT JOIN cours_etudiant c_e ON c.id = c_e.cours_id 
+        GROUP BY c.id
+        ORDER BY c.validCours DESC ;',
+         'c.*,u.username,count(DISTINCT c_e.etudiant_id) as count_iscription');
+        return $courses;
+    }
+
+    public static function getCourse($id){
+
+        $courses =CRUD::select('cours c 
+        LEFT JOIN users u ON c.enseignant_id = u.id 
+        LEFT JOIN cours_etudiant c_e ON c.id = c_e.cours_id 
+        LEFT JOIN categories ON categories.id = c.category_id ',
+         'DISTINCT c.*,u.username,categories.name,c_e.status',
+         'c.id=?;',[$id]);
+
+        return $courses;
+    }
+
+    public static function getPendingCourses(){
+        $validCompte="non valide";
+        $cours =CRUD::select('cours', '*',' validCours=? ', [$validCompte]);
+        return $cours;
     
+    }
+    
+    public function validationCours($id ,$validation) {
+      
+        $cours = [
+           'validCours' => $validation
+        ];
+       
+         CRUD::update('cours', $cours,'id=?',[$id]);
+     }
 
     public static function getCountCours(){
         $articles =CRUD::select('cours','count(*) as count');
@@ -47,7 +85,12 @@ class Cours{
 
 } 
 
+$cours = new Cours();
 
+if(isset($_GET["validation"]) ){
+    $cours->validationCours($_GET["id"] ,$_GET["validation"]);
+    header("Location: ../view/pendingCourses.php");
+}
 
 
 ?>
