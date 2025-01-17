@@ -7,16 +7,17 @@ use youdemy_db;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    full_name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     phone VARCHAR(20),
     password VARCHAR(255) NOT NULL,
     bio TEXT,
     profil_img_url VARCHAR(255),
     role ENUM('Admin', 'Enseignant', 'Etudiant') NOT NULL,
-    statutCompte ENUM('suspension', 'activation') NOT NULL DEFAULT 'activation',
+    statutCompte ENUM('suspend', 'activate') NOT NULL DEFAULT 'activate',
     validCompte ENUM('valide', 'non valide') NOT NULL DEFAULT 'valide'
 );
+
 
 CREATE TABLE Categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,12 +33,14 @@ CREATE TABLE Cours (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
-    contenu TEXT NOT NULL,
+    contenu VARCHAR(255),
+    contenu_video VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    validCours ENUM('valide', 'non valide') NOT NULL DEFAULT 'non valide',
     enseignant_id INT,
     category_id INT,
-    FOREIGN KEY (enseignant_id) REFERENCES Utilisateur(id) ON DELETE SET NULL,
-    FOREIGN KEY (category_id) REFERENCES Category(id) ON DELETE SET NULL
+    FOREIGN KEY (enseignant_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (category_id) REFERENCES Categories(id) ON DELETE SET NULL
 );
 
 CREATE TABLE Cours_Tag (
@@ -58,4 +61,3 @@ CREATE TABLE Cours_Etudiant (
     FOREIGN KEY (etudiant_id) REFERENCES Utilisateur(id) ON DELETE CASCADE
 );
 
- 
