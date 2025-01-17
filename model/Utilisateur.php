@@ -71,7 +71,6 @@ abstract class Utilisateur{
            $this->password_hash = password_hash($_POST['password_hash'], PASSWORD_DEFAULT); 
            $this->bio = $_POST['bio'];
            $this->profile_picture_url = $_POST['profile_picture_url'];
-           self::$role = $_POST['role'];
      
            $user = [
                'username' => $this->username,
@@ -80,7 +79,6 @@ abstract class Utilisateur{
                'password_hash' => $this->password_hash,
                'bio' => $this->bio,
                'profile_picture_url' => $this->profile_picture_url,
-               'role' => self::$role
            ];
             CRUD::update('users', $user,'id=?',[$_POST['id']]);
         }
