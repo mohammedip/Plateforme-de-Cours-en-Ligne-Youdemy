@@ -23,6 +23,13 @@ class Enseignant extends Utilisateur{
             
     }
 
+    public static function getPendingAccounts(){
+        $role=self::$role;
+        $users =CRUD::select('users', '*', 'role = ? and validCompte="non valide" ', [$role]);
+        return $users;
+    
+    }
+
     public static function getAllMembers(){
         $role=self::$role;
         $users =CRUD::select('users', '*', 'role = ?', [$role]);
@@ -72,10 +79,14 @@ class Enseignant extends Utilisateur{
     }
 
 }
+
+$enseignant = new Enseignant;
+
 if(isset($_GET["action"]) && $_GET["action"]=="register"){
-    $enseignant = new Enseignant;
+    
     $role=$enseignant->getRole();
     $enseignant->register($role);
 }
+
 
 ?>
