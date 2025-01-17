@@ -86,6 +86,7 @@ $courses =$enseignant->getMyCourses($_SESSION['user']['id']);
                         <thead>
                             <tr class="text-left text-gray-500">
                                 <th class="pb-4">Courses</th>
+                                <th class="pb-4">Description</th>
                                 <th class="pb-4">Etudient</th>
                             </tr>
                         </thead>
@@ -93,6 +94,7 @@ $courses =$enseignant->getMyCourses($_SESSION['user']['id']);
                             <?php foreach ($courses as $course): ?>
                             <tr class="border-t">
                                 <td class="py-4"><?php echo $course['title']; ?></td>
+                                <td class="py-4"><?php echo $course['description']; ?></td>
                                 <td class="py-4"><?php echo $course['count_iscription']; ?></td>
                             </tr>
                             <?php endforeach; ?>
