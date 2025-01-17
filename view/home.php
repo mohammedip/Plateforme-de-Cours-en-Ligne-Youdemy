@@ -5,10 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 use App\Cours;
 
 require_once '../vendor/autoload.php';
-if (!$_SESSION['auth']) {
-    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/login.php");
-    exit();
-}
+
 
 
 $courses =Cours::getAllCourses();
