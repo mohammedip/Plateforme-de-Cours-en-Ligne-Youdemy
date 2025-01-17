@@ -46,7 +46,7 @@ class Etudiant extends Utilisateur{
         $courses =CRUD::select(' users u
         JOIN cours_etudiant c_e ON u.id = c_e.etudiant_id
          JOIN cours c ON c_e.cours_id = c.id ',
-        'c.title,c_e.status',
+        'c.*,c_e.status',
         'u.id = ?
         GROUP BY u.id,c.id ORDER BY c_e.status ASC ;', [$id]);
         return $courses;
@@ -54,12 +54,15 @@ class Etudiant extends Utilisateur{
     }
 }
 
+$etudiant = new Etudiant;
+
 if(isset($_GET["action"]) && $_GET["action"]=="register"){
-    $etudiant = new Etudiant;
+    
     $role=$etudiant->getRole();
     $etudiant->register($role);
     
 }
+
 
 
 
