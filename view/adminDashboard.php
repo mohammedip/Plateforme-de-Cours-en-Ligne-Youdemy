@@ -10,6 +10,15 @@ require_once dirname(__DIR__) . './vendor/autoload.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+if (!$_SESSION['auth']) {
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/login.php");
+    exit();
+}
+if ($_SESSION['user']['role'] === 'Etudiant') {
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/etudiantDashboard.php");
+} else if ($_SESSION['user']['role'] === 'Enseignant') {
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/enseignantDashboard.php");
+}
 
 $categoriesCount=Category::getCountCategories();
 $tagsCount=Tag::getCountTags();
@@ -130,9 +139,9 @@ $top_courses =Cours::getTopCourses();
                         <tbody>
                             <?php foreach ($top_teachers as $teacher): ?>
                             <tr class="border-t">
-                                <td class="py-4"><?php echo htmlspecialchars($teacher['username']); ?></td>
-                                <td class="py-4"><?php echo htmlspecialchars($teacher['count_cours']); ?></td>
-                                <td class="py-4"><?php echo htmlspecialchars($teacher['count_iscription']); ?></td>
+                                <td class="py-4"><?php echo $teacher['username']; ?></td>
+                                <td class="py-4"><?php echo $teacher['count_cours']; ?></td>
+                                <td class="py-4"><?php echo $teacher['count_iscription']; ?></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -157,9 +166,9 @@ $top_courses =Cours::getTopCourses();
                         <tbody>
                             <?php foreach ($top_courses as $cours): ?>
                             <tr class="border-t">
-                                <td class="py-4"><?php echo htmlspecialchars($cours['title']); ?></td>
-                                <td class="py-4"><?php echo htmlspecialchars($cours['username']); ?></td>
-                                <td class="py-4"><?php echo htmlspecialchars($cours['count_iscription']); ?></td>
+                                <td class="py-4"><?php echo $cours['title']; ?></td>
+                                <td class="py-4"><?php echo $cours['username']; ?></td>
+                                <td class="py-4"><?php echo $cours['count_iscription']; ?></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -167,7 +176,19 @@ $top_courses =Cours::getTopCourses();
                 </div>
             </div>
         </div>
-
+    <div>
+       <?php include('./components/footer.php'); ?> 
+    </div>
+    
     </div> <!-- End of Main Content -->
+    
+<?php
+
+if ($_SESSION['user']['role']=="Enseignant" || $_SESSION['user']['role']=="Etudiant" || $_SESSION['user']['role']=="Admin"){
+    echo'<script>
+    document.getElementById(\'dashbBtn\').classList.add(\'hidden\');
+    </script>';
+ }
+?>
 </body>
 </html>
