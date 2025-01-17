@@ -4,6 +4,8 @@ namespace App;
 use App\CRUD;
 
 require_once dirname(__DIR__) . './vendor/autoload.php'; 
+
+
 class Category {
 
     private string $name;
@@ -21,7 +23,7 @@ class Category {
             
     }
 
-    public function getCategorie($id){
+    public static function getCategorie($id){
         $categories =CRUD::select('categories', 'name', 'id = ?', [$id]);;
         return $categories;
     
@@ -54,6 +56,23 @@ class Category {
     }
 
    
+}
+
+$category= new Category();
+
+if(isset($_GET['action']) && $_GET['action']=="add"){
+    
+     $category->addCategorie();
+    header("Location: ../view/allCategories.php");
+
+}else if(isset($_GET['action']) && $_GET['action']=="delete"){
+
+     $category->deleteCategorie();
+    header("Location: ../view/allCategories.php");
+}else if(isset($_GET['action']) && $_GET['action']=="update"){
+
+    $category->updateCategorie();
+   header("Location: ../view/allCategories.php");
 }
 
 ?>
