@@ -8,6 +8,15 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+if (!$_SESSION['auth']) {
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/login.php");
+    exit();
+}
+if ($_SESSION['user']['role'] === 'Enseignant') {
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/enseignantDashboard.php");
+} else if ($_SESSION['user']['role'] === 'Admin') {
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/adminDashboard.php");
+}
 $etudiant=new Etudiant();
 $statistique=$etudiant->getMyCoursesStatistiques($_SESSION['user']['id']);
 $allCourses=$statistique[0]["count_courses"];
@@ -15,6 +24,15 @@ $coursesNotComplet=$statistique[0]["non_complet_courses"];
 $coursesComplet=$statistique[0]["complet_courses"];
 
 $courses =$etudiant->getMyCourses($_SESSION['user']['id']);
+
+$coursesPerPage = 2;
+$totalCourses = count($courses);
+$totalPages = ceil($totalCourses / $coursesPerPage);
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$startIndex = ($page - 1) * $coursesPerPage;
+$currentPageCourses = array_slice($courses, $startIndex, $coursesPerPage);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,30 +99,85 @@ $courses =$etudiant->getMyCourses($_SESSION['user']['id']);
             </div>
 
             <div class="bg-white rounded-lg shadow mt-4">
-                <div class="px-6 py-4 border-b">
-                    <h2 class="text-xl font-semibold">Courses</h2>
-                </div>
-                <div class="p-6">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="text-left text-gray-500">
-                                <th class="pb-4">Cours</th>
-                                <th class="pb-4">Statut</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($courses as $cours): ?>
-                            <tr class="border-t">
-                                <td class="py-4"><?php echo htmlspecialchars($cours['title']); ?></td>
-                                <td class="py-4"><?php echo htmlspecialchars($cours['status']); ?></td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+                        <!-- start card--->
 
+                        <div class="bg-white rounded-lg shadow mt-4">
+                        <div class="px-6 py-4 border-b">
+                            <h2 class="text-2xl font-bold text-gray-900">Courses</h2>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <?php if (count($currentPageCourses) > 0): ?>
+                            <?php foreach ($currentPageCourses as $cours): ?>
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                                        <?php echo $cours['title']; ?>
+                                    </h3>
+                                    <p class="text-gray-600 mb-3 line-clamp-2">
+                                        <span class="font-medium text-gray-700">Description:</span> <?php echo $cours['description']; ?>
+                                    </p>
+                                    <p class="text-gray-600 mb-3 line-clamp-3">
+                                        <span class="font-medium text-gray-700">Contenu:</span> <?php echo substr($cours['contenu'], 0, 100); ?>...
+                                    </p>
+                                    <div class="flex items-center justify-between text-gray-600 text-sm mb-3">
+                                        <span class="my-4">
+                                            <span class=" px-4 py-2 rounded-full text-sm text-white <?php echo $cours['status'] === 'complet' ? 'bg-green-500' : 'bg-red-500'; ?>">
+                                                <?php echo ucfirst($cours['status']); ?>
+                                            </span>
+                                        </span>
+                                        <span><span class="font-medium text-gray-700">Created:</span> <?php echo date('F j, Y', strtotime($cours['created_at'])); ?></span>
+                                    </div>
+                                    <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/singleCours.php?id=<?php echo $cours['id'] ?>" 
+                                    class="w-full bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-700">
+                                        View Details
+                                    </a>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                             
+                            <?php else: ?>
+                            <p class="text-gray-500 text-center">No courses available.</p>
+                            <?php endif; ?>
+                        </div>
+                        <!-- end cards--->
+                         
+                            <!--pagination-->
+
+                        <div class="flex justify-end p-6">
+                            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                <button onclick="showPage(<?php echo $i; ?>)" 
+                                        class="w-10 h-10 flex items-center justify-center rounded-full border-2 transition-transform transform hover:scale-105 <?php echo ($i === $page) ? 'bg-indigo-600 text-white border-indigo-600' : 'text-indigo-600 border-indigo-600 hover:bg-indigo-50'; ?>">
+                                    <?php echo $i; ?>
+                                </button>
+                            <?php endfor; ?>
+                        </div>
+
+                        <!--pagination-->
+                    </div>
+
+                             
+              </div>
+        <div>
+       
+    </div>
     </div> <!-- End of Main Content -->
+    <div>
+        <?php include('./components/footer.php'); ?> 
+    </div>
+    <?php
+
+if ($_SESSION['user']['role']=="Enseignant" || $_SESSION['user']['role']=="Etudiant" || $_SESSION['user']['role']=="Admin"){
+    echo'<script>
+    document.getElementById(\'dashbBtn\').classList.add(\'hidden\');
+    </script>';
+ }
+?>
+<script>
+        function showPage(page) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', page);
+            window.location.href = url;
+        }
+    </script>
 </body>
 </html>
