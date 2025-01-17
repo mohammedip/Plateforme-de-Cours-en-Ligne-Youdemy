@@ -4,6 +4,8 @@ namespace App;
 use App\CRUD;
 
 require_once dirname(__DIR__) . './vendor/autoload.php'; 
+
+
 class Tag {
 
     private string $name;
@@ -23,31 +25,46 @@ public static function getCountTags(){
     return $tags[0]['count'];  
    
 }
-public static function addTag(){
+public  function addTag(){
     if (isset($_POST['name'])) {
-        self::$name = $_POST['name'];
+        $this->name = $_POST['name'];
         $tag = [
-            'name' => self::$name,
+            'name' => $this->name,
         ];
         CRUD::insert('tags', $tag);
     }
 }
-public static function updateTag(){
+public  function updateTag(){
     if (isset($_POST['name'])) {
-        self::$name = $_POST['name'];
+        $this->name = $_POST['name'];
         $tag = [
-            'name' => self::$name,
+            'name' => $this->name,
         ];
         CRUD::update('tags', $tag,'id=?',[$_POST['id']]);
     }
 }
-public static function deleteTag(){
+public  function deleteTag(){
     if (isset($_GET['id'])) {
         
         CRUD::delete('tags','id=?',[$_GET['id']]);
     }
 }
 
+}
+$tag = new Tag();
+
+if(isset($_GET['action']) && $_GET['action']=="add"){
+    
+    $tag->addTag();
+    header("Location: ../view/allTags.php");
+}else if(isset($_GET['action']) && $_GET['action']=="delete"){
+
+    $tag->deleteTag();
+    header("Location: ../view/allTags.php");
+}else if(isset($_GET['action']) && $_GET['action']=="update"){
+
+    $tag->updateTag();
+    header("Location: ../view/allTags.php");
 }
 
 ?>
