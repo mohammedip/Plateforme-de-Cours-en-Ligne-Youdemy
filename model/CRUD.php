@@ -58,7 +58,7 @@ class CRUD {
     }
 
     public static function select($table, $columns = "*", $where = null, $params = []) {
-        try{
+         try{
 
             $sql = "SELECT $columns FROM $table";
             if ($where) {
@@ -70,11 +70,11 @@ class CRUD {
 
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
             
-        } catch (\PDOException $e) {
+         } catch (\PDOException $e) {
 
             error_log("Update Error: " . $e->getMessage());
             return [];
-        }
+         }
     }
 
 }
