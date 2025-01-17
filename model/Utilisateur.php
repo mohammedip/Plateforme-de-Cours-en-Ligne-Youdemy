@@ -51,6 +51,11 @@ abstract class Utilisateur{
                 'profile_picture_url' => $this->profile_picture_url,
                 'role' => $role,
             ];
+            if($role="Enseignant"){
+               $user += [
+                  'validCompte' => "non valide"
+               ];
+            }
             CRUD::insert('users', $user);
             header("Location: ../view/login.php");
 
@@ -80,6 +85,8 @@ abstract class Utilisateur{
             CRUD::update('users', $user,'id=?',[$_POST['id']]);
         }
      }
+   
+
 
 
       public static function logIn() {
@@ -100,12 +107,23 @@ abstract class Utilisateur{
                     'username' => $user['username'],
                     'role' => $user['role']
                 ];
+                
+                if($user['role']=="Enseignant"){
+
+                  if($user['validCompte']=="non valide"){
+
+                        return false;
+                  }else if($user['statutCompte']=="suspend"){
+
+                     return true;
+               }
+                }
                
                 return $user;
               }else if(($user['email']!==$email || !password_verify($password_hash, $user['password_hash'])) ){
                  continue;
               }else{
-                 return null;
+               return null;
               }
            }
      
@@ -119,9 +137,12 @@ if(isset($_GET["action"]) && $_GET["action"]=="login"){
     $auth= Utilisateur::logIn();
    
     if($auth===null){
-      
         header("Location: ../view/login.php?action=erreur");
-     }else if ($_SESSION['user']['role']=="Admin"){
+     }else  if($auth===false){
+      header("Location: ../view/login.php?action=nonValid");
+      }else  if($auth===true){
+         header("Location: ../view/login.php?action=suspend");
+      }else if ($_SESSION['user']['role']=="Admin"){
         header("Location: ../view/adminDashboard.php");
      }else if ($_SESSION['user']['role']=="Enseignant"){
         header("Location: ../view/enseignantDashboard.php");
@@ -129,6 +150,7 @@ if(isset($_GET["action"]) && $_GET["action"]=="login"){
         header("Location: ../view/etudiantDashboard.php");
      }
 }
+
 
 
 ?>
