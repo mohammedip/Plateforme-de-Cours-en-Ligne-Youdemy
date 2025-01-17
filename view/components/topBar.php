@@ -10,12 +10,15 @@
             </button>
         </div>
     </form>
-    <div class="flex items-center">
-        <button class="bg-blue-500 text-white p-2 rounded-lg hidden" type="button" id="addBtn">
-                Add Courses
-            </button>
+    <div class="flex items-center" id="topbarBtn">
+        <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/forms/addCours.php" class="block bg-blue-500 rounded-lg p-2 ml-1 text-white  hidden" id="addBtn">
+                    Add Courses
+        </a>
         <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/enseignantDashboard.php" class="block bg-blue-500 rounded-lg p-2 ml-1 text-white  hidden" id="dashbBtn">
                     My Courses
+        </a>
+        <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/home.php" class="block bg-blue-500 rounded-lg p-2 ml-1 text-white  " id="homeBtn">
+                    Home Page
         </a>
     </div>
     <!-- Topbar Navbar -->
@@ -79,6 +82,10 @@ if ($_SESSION['user']['role']=="Enseignant"){
     echo'<script>
     document.getElementById(\'dashbBtn\').classList.remove(\'hidden\');
     document.getElementById(\'dashbBtn\').href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/etudiantDashboard.php";
+    </script>';
+ }else if ($_SESSION['user']['role']=="Admin"){
+    echo'<script>
+    document.getElementById(\'homeBtn\').href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/adminDashboard.php";
     </script>';
  }
 ?>
