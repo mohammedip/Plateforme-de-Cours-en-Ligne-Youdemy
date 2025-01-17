@@ -8,6 +8,15 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+if (!$_SESSION['auth']) {
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/login.php");
+    exit();
+}
+if ($_SESSION['user']['role'] === 'Etudiant') {
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/etudiantDashboard.php");
+} else if ($_SESSION['user']['role'] === 'Admin') {
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/adminDashboard.php");
+}
 $enseignant=new Enseignant();
 $statistique=$enseignant->getMyCoursesStatistiques($_SESSION['user']['id']);
 $etudiantCount=$statistique[0]["count_iscription"];
@@ -70,7 +79,7 @@ $courses =$enseignant->getMyCourses($_SESSION['user']['id']);
             <!-- Top Teachers Table -->
             <div class="bg-white rounded-lg shadow">
                 <div class="px-6 py-4 border-b">
-                    <h2 class="text-xl font-semibold">Top Enseignants</h2>
+                    <h2 class="text-xl font-semibold">My Courses</h2>
                 </div>
                 <div class="p-6">
                     <table class="w-full">
@@ -83,8 +92,8 @@ $courses =$enseignant->getMyCourses($_SESSION['user']['id']);
                         <tbody>
                             <?php foreach ($courses as $course): ?>
                             <tr class="border-t">
-                                <td class="py-4"><?php echo htmlspecialchars($course['title']); ?></td>
-                                <td class="py-4"><?php echo htmlspecialchars($course['count_iscription']); ?></td>
+                                <td class="py-4"><?php echo $course['title']; ?></td>
+                                <td class="py-4"><?php echo $course['count_iscription']; ?></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -92,7 +101,18 @@ $courses =$enseignant->getMyCourses($_SESSION['user']['id']);
                 </div>
             </div>
         </div>
-
+        <div>
+       <?php include('./components/footer.php'); ?> 
+    </div>
     </div> <!-- End of Main Content -->
+
+    <?php
+
+if ($_SESSION['user']['role']=="Enseignant" || $_SESSION['user']['role']=="Etudiant" || $_SESSION['user']['role']=="Admin"){
+    echo'<script>
+    document.getElementById(\'dashbBtn\').classList.add(\'hidden\');
+    </script>';
+ }
+?>
 </body>
 </html>
