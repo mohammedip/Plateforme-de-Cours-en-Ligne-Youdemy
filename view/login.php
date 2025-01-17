@@ -81,6 +81,12 @@ session_destroy();
         <div id="error-message" class="hidden bg-red-500 text-white p-4 rounded" role="alert">
           Password or email is incorrect.
         </div>
+        <div id="validation-message" class="hidden bg-yellow-500 text-white p-4 rounded" role="alert">
+          Your account is not yet validate.
+        </div>
+        <div id="suspend-message" class="hidden bg-red-500 text-white p-4 rounded" role="alert">
+          Your account is suspended.
+        </div>
         <button 
           type="submit" 
           class="w-full bg-gray-600 text-white py-2 rounded-lg hover:bg-gray-700 transition duration-300">
@@ -97,10 +103,24 @@ session_destroy();
 
   <!-- PHP Script -->
   <?php
-  if (isset($_GET['action']) && $_GET['action'] == 'erreur') {
+  if (isset($_GET['action'])) {
+    if($_GET['action'] == 'erreur'){
+
       echo "<script>
           document.getElementById('error-message').classList.remove('hidden');
       </script>";
+    }else if($_GET['action'] == 'nonValid'){
+
+      echo "<script>
+          document.getElementById('validation-message').classList.remove('hidden');
+      </script>";
+    }else if($_GET['action'] == 'suspend'){
+
+      echo "<script>
+          document.getElementById('suspend-message').classList.remove('hidden');
+      </script>";
+    }
+      
   }
   ?>
 </body>
