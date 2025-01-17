@@ -42,17 +42,11 @@ session_destroy();
 
       <!-- Navigation Buttons -->
       <div class="flex items-center justify-between space-x-4">
-        <a href="#" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition duration-300">
+        <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/home.php" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition duration-300">
           Home page
         </a>
 
-        <a href="#" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition duration-300 hidden">
-          Sign in
-        </a>
-
-        <a href="#" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition duration-300 hidden">
-          Sign up
-        </a>
+       
       </div>
     </div>
   </nav>
