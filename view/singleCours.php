@@ -50,8 +50,15 @@ if (session_status() == PHP_SESSION_NONE) {
 
             <!-- Course Content -->
             <div class="prose prose-lg text-gray-800 mb-6">
-                <h3 class="text-xl font-semibold">Content</h3>
-                <p><?php echo nl2br($course['contenu']); ?></p>
+                <h3 class="text-xl font-semibold mb-4">Content : </h3>
+
+                <?php if(empty($course['contenu_video'])):?>
+                    <p><?php echo $course['contenu']; ?></p>
+
+                <?php elseif(empty($course['contenu'])): ?>
+
+                    <iframe width="560" height="315" src="<?php echo $course['contenu_video']; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <?php endif; ?>
             </div>
 
             <?php
