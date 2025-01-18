@@ -11,13 +11,13 @@
         </div>
     </form>
     <div class="flex items-center" id="topbarBtn">
-        <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/forms/addCours.php" class="block bg-blue-500 rounded-lg p-2 ml-1 text-white  hidden" id="addBtn">
+        <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/forms/addCours.php" class="block bg-blue-500 rounded-lg p-2 ml-1 text-white hover:bg-blue-700 transition  hidden" id="addBtn">
                     Add Courses
         </a>
-        <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/enseignantDashboard.php" class="block bg-blue-500 rounded-lg p-2 ml-1 text-white  hidden" id="dashbBtn">
+        <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/enseignantDashboard.php" class="block bg-blue-500 rounded-lg p-2 ml-1 text-white hover:bg-blue-700 transition  hidden" id="dashbBtn">
                     My Courses
         </a>
-        <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/home.php" class="block bg-blue-500 rounded-lg p-2 ml-1 text-white  " id="homeBtn">
+        <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/home.php" class="block bg-blue-500 rounded-lg p-2 ml-1 text-white hover:bg-blue-700 transition  " id="homeBtn">
                     Home Page
         </a>
     </div>
