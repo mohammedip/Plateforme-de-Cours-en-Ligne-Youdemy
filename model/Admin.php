@@ -84,4 +84,8 @@ if(isset($_GET["validation"]) ){
     $admin->validationMember($_GET["id"] ,$_GET["validation"]);
     header("Location: ../view/pendingAccounts.php");
 }
+if(isset($_GET["action"]) && $_GET["action"]=="update" ){
+    $admin->updateProfil();
+    header("Location: ../view/profile.php");
+}
 ?>
