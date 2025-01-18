@@ -88,6 +88,7 @@ $courses =$enseignant->getMyCourses($_SESSION['user']['id']);
                                 <th class="pb-4">Courses</th>
                                 <th class="pb-4">Description</th>
                                 <th class="pb-4">Etudient</th>
+                                <th class="pb-4">Validation</th>
                                 <th class="px-4 py-2 border">Actions</th>
                             </tr>
                         </thead>
@@ -97,6 +98,7 @@ $courses =$enseignant->getMyCourses($_SESSION['user']['id']);
                                 <td class="py-4"><?php echo $course['title']; ?></td>
                                 <td class="py-4"><?php echo $course['description']; ?></td>
                                 <td class="py-4"><?php echo $course['count_iscription']; ?></td>
+                                <td class="py-4"><?php echo $course['validCours']; ?></td>
                                 <td class="px-4 py-2 border">
                                     <a href="./forms/updateCours.php?id=<?php echo $course['id']; ?>" class="text-yellow-500 hover:text-yellow-600 mx-2"><i class="fa-solid fa-pen"></i></a>
                                     <a href="../model/Cours.php?action=delete&id=<?php echo $course['id']; ?>" class="text-red-500 hover:text-red-600 mx-2"><i class="fa-solid fa-trash"></i></a>
