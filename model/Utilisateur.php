@@ -20,7 +20,12 @@ abstract class Utilisateur{
 
     abstract public static function getAllMembers();
 
-    abstract public static function getCountMembers();
+    public static function getCountMembers(){
+      $users =CRUD::select('users','count(*) as count');
+      
+         return $users[0]['count'];
+          
+  }
 
     public static function getAllUsers(){
         $users =CRUD::select('users', '*');
@@ -63,8 +68,8 @@ abstract class Utilisateur{
         }
      }
 
-      public  function updateProfil() {
-        if (isset($_POST['username'], $_POST['email'], $_POST['password_hash'], $_POST['bio'], $_POST['profile_picture_url'], $_POST['role'])) {
+      public function updateProfil() {
+        if (isset($_POST['username'], $_POST['email'], $_POST['password_hash'], $_POST['bio'], $_POST['profile_picture_url'])) {
            $this->username = $_POST['username'];
            $this->email = $_POST['email'];
            $this->phone = $_POST['phone'];
@@ -132,6 +137,7 @@ abstract class Utilisateur{
 }
 
 if(isset($_GET["action"]) && $_GET["action"]=="login"){
+
     $auth= Utilisateur::logIn();
    
     if($auth===null){
