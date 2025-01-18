@@ -70,7 +70,7 @@ class Enseignant extends Utilisateur{
         $courses =CRUD::select(' users u
         LEFT JOIN cours c ON c.enseignant_id = u.id 
         LEFT JOIN cours_etudiant c_e ON c.id = c_e.cours_id ',
-        'c.title,c.id,c.description,count(DISTINCT c_e.etudiant_id) as count_iscription',
+        'c.title,c.id,c.validCours,c.description,count(DISTINCT c_e.etudiant_id) as count_iscription',
         'u.id = ?
         GROUP BY u.id,c.id
         ORDER BY count_iscription DESC ;', [$id]);
