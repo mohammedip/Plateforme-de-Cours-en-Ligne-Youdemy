@@ -13,9 +13,9 @@ if (!$_SESSION['auth']) {
     exit();
 }
 if ($_SESSION['user']['role'] === 'Enseignant') {
-    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/enseignantDashboard.php");
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/home.php");
 } else if ($_SESSION['user']['role'] === 'Admin') {
-    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/adminDashboard.php");
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/home.php");
 }
 $etudiant=new Etudiant();
 $statistique=$etudiant->getMyCoursesStatistiques($_SESSION['user']['id']);
@@ -110,15 +110,13 @@ $currentPageCourses = array_slice($courses, $startIndex, $coursesPerPage);
                             <?php foreach ($currentPageCourses as $cours): ?>
                             <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl">
                                 <div class="p-6">
-                                    <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                                    <h2 class="text-3xl font-semibold text-gray-800 mb-6">
                                         <?php echo $cours['title']; ?>
-                                    </h3>
+                                    </h2>
                                     <p class="text-gray-600 mb-3 line-clamp-2">
                                         <span class="font-bold text-gray-700">Description:</span> <?php echo $cours['description']; ?>
                                     </p>
-                                    <p class="text-gray-600 mb-3 line-clamp-3">
-                                        <span class="font-bold text-gray-700">Contenu:</span> <?php echo substr($cours['contenu'], 0, 100); ?>...
-                                    </p>
+                                    
                                     <div class="flex items-center justify-between text-gray-600 text-sm mb-3">
                                         <span class="my-4">
                                             <span class=" px-4 py-2 rounded-full text-sm text-white <?php echo $cours['status'] === 'complet' ? 'bg-green-500' : 'bg-red-500'; ?>">
@@ -128,7 +126,7 @@ $currentPageCourses = array_slice($courses, $startIndex, $coursesPerPage);
                                         <span><span class="font-medium text-gray-700">Created:</span> <?php echo date('F j, Y', strtotime($cours['created_at'])); ?></span>
                                     </div>
                                     <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/singleCours.php?id=<?php echo $cours['id'] ?>" 
-                                    class="w-full bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-700">
+                                    class="w-full bg-blue-600 text-white text-lg font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-700">
                                         View Details
                                     </a>
                                 </div>
