@@ -25,15 +25,22 @@ public static function getCountTags(){
     return $tags[0]['count'];  
    
 }
+
 public  function addTag(){
     if (isset($_POST['name'])) {
-        $this->name = $_POST['name'];
-        $tag = [
+
+        $tags = explode(',', $_POST['name']);
+        foreach($tags as $tag) {
+
+        $this->name =$tag;
+        $tagData = [
             'name' => $this->name,
         ];
-        CRUD::insert('tags', $tag);
+        CRUD::insert('tags', $tagData);
     }
 }
+}
+
 public  function updateTag(){
     if (isset($_POST['name'])) {
         $this->name = $_POST['name'];
