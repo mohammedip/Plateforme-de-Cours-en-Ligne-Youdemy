@@ -85,6 +85,7 @@ if ($_SESSION['user']['role']=="Enseignant"){
     </script>';
  }else if ($_SESSION['user']['role']=="Admin"){
     echo'<script>
+    document.getElementById(\'homeBtn\').text="Dashboard";
     document.getElementById(\'homeBtn\').href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/adminDashboard.php";
     </script>';
  }

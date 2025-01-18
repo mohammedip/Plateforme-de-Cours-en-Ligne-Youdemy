@@ -29,7 +29,7 @@ lg:w-64 md:w-48 "> <!-- Set different widths for different breakpoints -->
             <div class="hidden pl-4 mt-2">
                 <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/home.php" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
                     <i class="fas fa-list w-6 text-sm"></i>
-                    All Courses
+                    Home Page
                 </a>
                 <a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/pendingCourses.php" class="block px-6 py-2 text-gray-400 hover:bg-gray-700 hover:text-white">
                     <i class="fas fa-hourglass-half w-6 text-sm"></i>
