@@ -25,7 +25,6 @@ class CRUD {
         } catch (\PDOException $e) {
 
             error_log("Insert Error: " . $e->getMessage());
-            return [];
         }
 }
 
@@ -40,7 +39,6 @@ class CRUD {
         } catch (\PDOException $e) {
 
             error_log("Update Error: " . $e->getMessage());
-            return [];
         }
     }
 
@@ -53,7 +51,6 @@ class CRUD {
         } catch (\PDOException $e) {
 
             error_log("Update Error: " . $e->getMessage());
-            return [];
         }
     }
 
@@ -73,7 +70,7 @@ class CRUD {
          } catch (\PDOException $e) {
 
             error_log("Update Error: " . $e->getMessage());
-            return [];
+            
          }
     }
 
