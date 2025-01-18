@@ -70,19 +70,27 @@ require_once '../../vendor/autoload.php';
                         </div>
                         <!-- Contenu -->
                         <div>
+                                <label for="contenu_type" class="block text-gray-700 font-medium mb-2">Contenu Type :</label>
+                                <select id="contenu_type" name="contenu_type"
+                                    class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300" required>
+                                    <option value="" disabled selected hidden>Sélectionner un type</option>
+                                    <option value="Documment">Documment</option>
+                                    <option value="Video">Video</option>
+                                </select>
+                            </div>
+                    </div>
+
+                    <div class="hidden" id="contenuInput">
                             <label for="contenu" class="block text-gray-700 font-medium mb-2">Contenu :</label>
                             <textarea id="contenu" name="contenu" rows="4" placeholder="Entrez le contenu"
                                 class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"></textarea>
-                        </div>
                     </div>
-
                     <!-- Contenu Vidéo Input -->
-                    <div>
+                    <div class="hidden" id="videoInput">
                         <label for="contenu_video" class="block text-gray-700 font-medium mb-2">Vidéo URL :</label>
                         <input type="text" id="contenu_video" name="contenu_video" placeholder="Entrez un video url"
-                            class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300" required>
+                            class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300" >
                     </div>
-
                     <!-- Tags and Selects Container -->
                     <div class="flex flex-wrap justify-between gap-6">
                         <!-- Tags Section -->
@@ -160,9 +168,33 @@ foreach ($cours as $cours) {
     document.getElementById("contenu").value = "' . $cours['contenu'] . '";
     document.getElementById("contenu_video").value = "' . $cours['contenu_video'] . '";
     document.getElementById("category_id").value = "' . $cours['category_id'] . '";
+
+    if(document.getElementById("contenu").value === ""){
+
+        document.getElementById("videoInput").classList="";
+    }else if(document.getElementById("contenu_video").value === ""){
+    
+        document.getElementById("contenuInput").classList=""
+    }
     </script>
     ';
 }
 ?>
+<script>
+    document.getElementById("contenu_type").addEventListener("change", function () {
+if(this.value==="Video"){
+
+    document.getElementById("contenuInput").classList="hidden";
+    document.getElementById("contenu").value="";
+    document.getElementById("videoInput").classList="";
+
+}else if(this.value==="Documment"){
+
+    document.getElementById("videoInput").classList="hidden";
+    document.getElementById("contenu_video").value="";
+    document.getElementById("contenuInput").classList="";
+}
+    });
+</script> 
 </body>
 </html>
