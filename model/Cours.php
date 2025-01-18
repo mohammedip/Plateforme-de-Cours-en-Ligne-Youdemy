@@ -40,9 +40,11 @@ class Cours{
 
         $courses =CRUD::select('cours c 
         LEFT JOIN users u ON c.enseignant_id = u.id 
-        LEFT JOIN cours_etudiant c_e ON c.id = c_e.cours_id ',
-         'c.*,u.username,count(DISTINCT c_e.etudiant_id) as count_iscription',
-         'c.validCours=? GROUP BY c.id;',['valide']);
+        LEFT JOIN cours_etudiant c_e ON c.id = c_e.cours_id 
+        LEFT JOIN cours_tag c_t  ON c.id = c_t.cours_id 
+        LEFT JOIN tags t ON t.id = c_t.tag_id ',
+         'c.*,u.username, GROUP_CONCAT(DISTINCT t.name SEPARATOR ", ") as tags,count(DISTINCT c_e.etudiant_id) as count_iscription',
+         'c.validCours=? GROUP BY c.id, u.username;',['valide']);
         return $courses;
     }
 
@@ -65,9 +67,11 @@ class Cours{
         $courses =CRUD::select('cours c 
         LEFT JOIN users u ON c.enseignant_id = u.id 
         LEFT JOIN cours_etudiant c_e ON c.id = c_e.cours_id 
-        LEFT JOIN categories ON categories.id = c.category_id ',
-         'DISTINCT c.*,u.username,categories.name,c_e.status',
-         'c.id=? LIMIT 1;',[$courseId]);
+        LEFT JOIN categories ON categories.id = c.category_id
+        LEFT JOIN cours_tag c_t  ON c.id = c_t.cours_id 
+        LEFT JOIN tags t ON t.id = c_t.tag_id  ',
+         'DISTINCT c.*, GROUP_CONCAT(DISTINCT t.name SEPARATOR ", ") as tags,u.username,categories.name,MAX(c_e.status) as status',
+         'c.id=? GROUP BY c.id LIMIT 1;',[$courseId]);
 
         return $courses;
     }
