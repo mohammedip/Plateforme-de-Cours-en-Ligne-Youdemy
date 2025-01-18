@@ -39,6 +39,8 @@ CREATE TABLE Cours (
     validCours ENUM('valide', 'non valide') NOT NULL DEFAULT 'non valide',
     enseignant_id INT,
     category_id INT,
+    tag_id INT,
+    FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE SET NULL,
     FOREIGN KEY (enseignant_id) REFERENCES users(id) ON DELETE SET NULL,
     FOREIGN KEY (category_id) REFERENCES Categories(id) ON DELETE SET NULL
 );
@@ -61,3 +63,10 @@ CREATE TABLE Cours_Etudiant (
     FOREIGN KEY (etudiant_id) REFERENCES Utilisateur(id) ON DELETE CASCADE
 );
 
+
+
+
+
+
+
+    
