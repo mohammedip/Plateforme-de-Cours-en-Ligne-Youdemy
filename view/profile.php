@@ -53,36 +53,43 @@ $id =$_SESSION['user']['id'] ;
 
             <!-- Begin Page Content -->
             <div class="container mx-auto p-6">
-
-                <!-- Page Heading -->
-                <div class="flex justify-between items-center mb-6">
-                    <h1 class="text-2xl font-bold text-gray-800">Profile</h1>
-                </div>
-
-                <!-- Profile Info Card -->
-                <div class="bg-white shadow rounded-lg p-6">
-                    <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-6">
-                        <!-- Profile Picture -->
-                        <div class="flex-shrink-0 text-center">
-                            <img src="<?php echo $user['profile_picture_url']; ?>" alt="User Profile Picture"
-                                class="w-32 h-32 rounded-full object-cover">
+                        <!-- Page Heading -->
+                        <div class="flex justify-between items-center mb-6">
+                            <h1 class="text-3xl font-extrabold text-gray-800">Profile</h1>
                         </div>
 
-                        <!-- Profile Info -->
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-900"><?php echo $user['username']; ?></h3>
-                            <p class="text-gray-700">Email: <?php echo $user['email']; ?></p>
-                            <p class="text-gray-700">Bio: <?php echo $user['bio']; ?></p>
-                            <p class="text-gray-700">Role: <?php echo $user['role']; ?></p>
+                        <!-- Profile Info Card -->
+                        <div class="bg-white shadow-lg rounded-lg p-8">
+                            <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                                <!-- Profile Picture -->
+                                <div class="flex-shrink-0">
+                                    <img src="<?php echo $user['profile_picture_url']; ?>" alt="User Profile Picture"
+                                        class="w-36 h-36 rounded-full border-4  object-cover shadow-lg">
+                                </div>
 
-                            <!-- Edit Profile Button -->
-                            <a href="../Forms/UserUpdate.php?id=<?php echo $user['id']; ?>"
-                                class="mt-4 inline-block bg-yellow-400 text-white font-medium py-2 px-4 rounded hover:bg-yellow-500">Edit Profile</a>
+                                <!-- Profile Info -->
+                                <div class="text-center md:text-left">
+                                    <h3 class="text-2xl font-bold text-gray-900"><?php echo $user['username']; ?></h3>
+                                    <p class="mt-2 text-gray-600 font-bold text-sm">Email: 
+                                        <span class="text-gray-800 font-medium"><?php echo $user['email']; ?></span>
+                                    </p>
+                                    <p class="mt-2 text-gray-600 font-bold text-sm">Bio: 
+                                        <span class="text-gray-800 font-medium"><?php echo $user['bio']; ?></span>
+                                    </p>
+                                    <p class="mt-2 text-gray-600 font-bold text-sm">Role: 
+                                        <span class="text-gray-800 font-medium"><?php echo $user['role']; ?></span>
+                                    </p>
+
+                                    <!-- Edit Profile Button -->
+                                    <a href="./forms/updateUser.php?id=<?php echo $user['id']; ?>"
+                                        class="mt-6 inline-block bg-yellow-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-yellow-600 transition duration-300">
+                                        Edit Profile
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
             <!-- /.container-fluid -->
 
         </div>
