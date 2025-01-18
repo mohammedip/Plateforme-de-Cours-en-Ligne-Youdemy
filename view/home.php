@@ -91,6 +91,17 @@ $currentPageCourses = array_slice($courses, $startIndex, $coursesPerPage);
                                             <?php echo $cours['count_iscription']; ?>
                                         </p>
 
+                                        <div class="flex flex-wrap gap-2 mb-6">
+                                            <?php
+                                            $tags = explode(', ', $cours['tags']);
+                                            foreach ($tags as $tag):
+                                            ?>
+                                                <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-green-200 transition duration-200">
+                                                    <?php echo $tag; ?>
+                                                </span>
+                                            <?php endforeach; ?>
+                                        </div>
+
                                         <!-- Button and Status in the Same Row -->
                                         <div class="flex items-center justify-between mt-6">
                                             <!-- View Details Button -->

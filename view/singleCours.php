@@ -1,6 +1,7 @@
 <?php
 
 use App\Cours;
+use App\Etudiant;
 
 require_once dirname(__DIR__) . './vendor/autoload.php'; 
 
@@ -48,6 +49,16 @@ if (session_status() == PHP_SESSION_NONE) {
                 <p><?php echo nl2br($course['description']); ?></p>
             </div>
 
+            <div class="flex flex-wrap gap-2 mb-6">
+                  <?php
+                  $tags = explode(', ', $course['tags']);
+                  foreach ($tags as $tag):
+                  ?>
+                      <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-green-200 transition duration-200">
+                          <?php echo $tag; ?>
+                      </span>
+                  <?php endforeach; ?>
+             </div>
             <!-- Course Content -->
             <div class="prose prose-lg text-gray-800 mb-6">
                 <h3 class="text-xl font-semibold mb-4">Content : </h3>
@@ -70,10 +81,33 @@ if (session_status() == PHP_SESSION_NONE) {
                 </span>
             </div>
             <?php endif; ?>
-            <!-- Back Button -->
+            
+            <div>
             <a href="etudiantDashboard.php" class="inline-block mt-8 bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition">
                 Back to the Courses
             </a>
+                <?php
+                    if ($_SESSION['user']['role'] === 'Etudiant'):
+                        $etudiant = new Etudiant;
+                        $courses = $etudiant->getInscription($_SESSION["user"]['id']);
+                        $isEnrolled = false;
+                        foreach ($courses as $cours):
+                        if($cours["cours_id"]==$course['id'] && $cours["etudiant_id"]==$_SESSION["user"]['id']):  $isEnrolled = true;  
+                ?>
+                    <a href="../model/Etudiant.php?action=completCours&userId=<?php echo $_SESSION["user"]['id'] ;?>&coursId=<?php echo $course['id'] ;?>" class="inline-block mt-8 bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition">
+                        Complet le Cours
+                    </a>
+                    <?php break; ?> 
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <?php if(!$isEnrolled): ?>
+                     <a href="../model/Etudiant.php?action=inscription&userId=<?php echo $_SESSION["user"]['id'] ;?>&coursId=<?php echo $course['id'] ;?>" class="inline-block mt-8 bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition">
+                    Inscrire au Cours
+                    </a>
+                   
+                <?php endif; ?>
+                <?php endif; ?>
+        </div>
         </div>
         <?php endforeach; ?>
     </div>

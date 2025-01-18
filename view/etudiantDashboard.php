@@ -117,6 +117,17 @@ $currentPageCourses = array_slice($courses, $startIndex, $coursesPerPage);
                                         <span class="font-bold text-gray-700">Description:</span> <?php echo $cours['description']; ?>
                                     </p>
                                     
+                                    <div class="flex flex-wrap gap-2 mb-6">
+                                            <?php
+                                            $tags = explode(', ', $cours['tags']);
+                                            foreach ($tags as $tag):
+                                            ?>
+                                                <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-green-200 transition duration-200">
+                                                    <?php echo $tag; ?>
+                                                </span>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        
                                     <div class="flex items-center justify-between text-gray-600 text-sm mb-3">
                                         <span class="my-4">
                                             <span class=" px-4 py-2 rounded-full text-sm text-white <?php echo $cours['status'] === 'complet' ? 'bg-green-500' : 'bg-red-500'; ?>">
