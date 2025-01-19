@@ -7,7 +7,6 @@ use App\Cours;
 require_once '../vendor/autoload.php';
 
 
-
 $courses =Cours::getAllCourses();
 $coursesPerPage = 3;
 $totalCourses = count($courses);
@@ -26,7 +25,7 @@ $currentPageCourses = array_slice($courses, $startIndex, $coursesPerPage);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tags Table</title>
+    <title>Home Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -38,23 +37,23 @@ $currentPageCourses = array_slice($courses, $startIndex, $coursesPerPage);
 
         <!-- Sidebar -->
          <?php
-         if ($_SESSION['user']['role'] === 'Admin') {
+         if (isset($_SESSION['auth'])){
+         if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'Admin') {
             echo '<div class="w-64 bg-gray-800 text-white fixed h-screen">';
            include './components/sidebar.php'; 
              echo '</div>
-             <div class="flex-1 ml-64 flex flex-col">
-             ';
+             <div class="flex-1 ml-64 flex flex-col">';
+             include './components/topbar.php';
          }else{
             echo '<div class="flex-1 flex flex-col">';
-         }
          
-         ?>
-        
-
-
-            <!-- Topbar -->
-            <?php include './components/topbar.php'; ?>
-
+      
+            include './components/topbar.php'; }
+            }else{ echo '<div class="flex-1 flex flex-col">
+            <div class="flex items-center "><a href="http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/login.php" class="block bg-blue-500 rounded-lg mt-2 py-2 px-4 ml-auto mr-4 text-white hover:bg-blue-700 transition  " id="homeBtn">
+                    Log in
+            </a></div>';} ?>
+      
 
            <div class="p-6 flex-grow">
                     <!-- Card Section -->
