@@ -49,6 +49,10 @@ if ($_SESSION['user']['role'] === 'Etudiant') {
                            class="w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-200 focus:border-blue-500" 
                            placeholder="Enter tag name" required>
                 </div>
+                <p class="text-sm  mt-2 bg-green-50 border border-green-200 rounded-md p-2">
+                <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>You can add multiple tags by separating them with commas (Ex : "tag1, tag2, tag3").
+                </p>
+
 
                 <!-- Buttons centered -->
                 <div class="flex justify-center">
