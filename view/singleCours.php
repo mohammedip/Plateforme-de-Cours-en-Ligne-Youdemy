@@ -8,7 +8,10 @@ require_once dirname(__DIR__) . './vendor/autoload.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
+if (!$_SESSION['auth']) {
+    header("Location: http://localhost/Plateforme-de-Cours-en-Ligne-Youdemy/view/login.php");
+    exit();
+}
 
 
 ?>
