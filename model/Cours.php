@@ -191,7 +191,12 @@ class Cours{
 $cours = new Cours();
 
 if(isset($_GET["validation"]) ){
+    
+    if($_GET["validation"]=="non valide"){
+        $cours->deleteCours($_GET["id"]); 
+    }else{
     $cours->validationCours($_GET["id"] ,$_GET["validation"]);
+    }
     header("Location: ../view/pendingCourses.php");
 }
 
