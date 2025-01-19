@@ -16,9 +16,9 @@ class Admin extends Utilisateur{
            'statutCompte' => $statut
         ];
          CRUD::update('users', $user,'id=?',[$id]);
-     }
+    }
 
-     public function validationMember($id ,$validation) {
+    public function validationMember($id ,$validation) {
       
         $user = [
            'validCompte' => $validation
@@ -32,7 +32,7 @@ class Admin extends Utilisateur{
 
         }
          CRUD::update('users', $user,'id=?',[$id]);
-     }
+    }
 
     public static function getCountMembers(){
         $role=self::$role;
@@ -57,7 +57,7 @@ class Admin extends Utilisateur{
            CRUD::delete('cours','enseignant_id=?',[$id]);
             CRUD::delete('users','id=?',[$id]);
         }
-     }
+    }
 
 }
 
